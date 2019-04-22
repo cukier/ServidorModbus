@@ -16,10 +16,12 @@ Serial::Serial(QWidget *parent) :
     connect(ui->pbSalvar, &QPushButton::clicked,
             this, [this] () {
         m_parameters.porta = ui->lePorta->text();
-        m_parameters.data = ui->cbData->currentData().toInt();
-        m_parameters.parity = ui->cbParity->currentData().toChar();
-        m_parameters.stop = ui->cbStop->currentData().toInt();
-        m_parameters.baud = ui->cbBaud->currentData().toInt();
+//        m_parameters.data = ui->cbData->currentData().toInt();
+        m_parameters.data = ui->cbData->currentText().toInt();
+        m_parameters.parity = ui->cbParity->currentText()[0];
+        m_parameters.stop = ui->cbStop->currentText().toInt();
+        m_parameters.baud = ui->cbBaud->currentText().toInt();
+        m_parameters.addr = ui->sbAddr->value();
         hide();
     });
 }
