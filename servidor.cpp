@@ -32,7 +32,13 @@ Servidor::Servidor(QWidget *parent) :
 }
 
 Servidor::~Servidor()
-{
+{    
+    if (listner) {
+        disconnect(listner);
+        listner->terminate();
+        delete listner;
+    }
+
     if (mb_mapping) {
         modbus_mapping_free(mb_mapping);
     }
@@ -50,6 +56,7 @@ void Servidor::onConn()
 {
     if (isConn) {
         if (listner) {
+            disconnect(listner);
             listner->terminate();
             delete listner;
             listner = nullptr;
@@ -100,8 +107,23 @@ void Servidor::onConn()
 
         isConn = true;
         listner = new ModbusListner(ctx, mb_mapping);
+        connect(listner, &ModbusListner::newMap,
+                this, &Servidor::onNewMap);
         listner->start();
         ui->pbConn->setText("Desconectar");
         ui->statusbar->showMessage("Conectado");
+    }
+}
+
+void Servidor::onNewMap()
+{
+    qDebug() << "<Servidor> newMap";
+
+    for (int i = 0; i < 200; ++i) {
+        int col = i % 10;
+        int lin = int(double(i) / 10);
+        QModelIndex index = map->index(lin, col);
+        quint16 val = mb_mapping->tab_registers[i];
+        map->setData(index, val);
     }
 }

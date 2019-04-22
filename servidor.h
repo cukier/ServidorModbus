@@ -22,6 +22,7 @@ public:
 
 private slots:
     void onConn();
+    void onNewMap();
 
 private:
     Ui::Servidor *ui;

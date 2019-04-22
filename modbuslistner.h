@@ -13,7 +13,9 @@ public:
     explicit ModbusListner(modbus_t *modbusCtx, modbus_mapping_t *modbusMappin);
 
     void run() override;
+
 signals:
+    void newMap();
 
 public slots:
 

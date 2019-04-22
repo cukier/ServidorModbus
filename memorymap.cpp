@@ -32,3 +32,17 @@ QVariant MemoryMap::data(const QModelIndex &index, int role) const
 
     return QVariant();
 }
+
+bool MemoryMap::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (role == Qt::EditRole) {
+        int aux = (index.row() * 10) + index.column();
+
+        if (aux < 200) {
+            m_map[aux] = quint16(value.toInt());
+            return true;
+        }
+    }
+
+    return false;
+}

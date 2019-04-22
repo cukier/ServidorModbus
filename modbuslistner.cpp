@@ -30,10 +30,21 @@ void ModbusListner::run()
             continue;
         }
 
-        rc = modbus_reply(ctx, query, rc, mb_mapping);
+        {
+            QMutexLocker locker(&mutex);
+            rc = modbus_reply(ctx, query, rc, mb_mapping);
+            emit newMap();
+            qDebug() << "<ModbusListner> newMap";
+        }
 
         if (rc == -1) {
             break;
         }
+
+//        int header_length = modbus_get_header_length(ctx);
+
+//        if (query[header_length] == 0x03) {
+
+//        }
     }
 }
