@@ -33,7 +33,6 @@ void ModbusListner::run()
             QMutexLocker locker(&mutex);
             rc = modbus_reply(ctx, query, rc, mb_mapping);
             emit newMap();
-            qDebug() << "<ModbusListner> newMap";
         }
 
         if (rc == -1) {

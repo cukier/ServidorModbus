@@ -117,8 +117,6 @@ void Servidor::onConn()
 
 void Servidor::onNewMap()
 {
-    qDebug() << "<Servidor> newMap";
-
     for (int i = 0; i < 200; ++i) {
         int col = i % 10;
         int lin = int(double(i) / 10);

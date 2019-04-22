@@ -21,8 +21,7 @@ int MemoryMap::columnCount(const QModelIndex &/*parent*/) const
 
 QVariant MemoryMap::data(const QModelIndex &index, int role) const
 {
-    if (role == Qt::DisplayRole)
-    {
+    if (role == Qt::DisplayRole) {
         int aux = (index.row() * 10) + index.column();
 
         if (aux < 200) {
