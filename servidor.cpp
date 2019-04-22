@@ -3,6 +3,7 @@
 
 #include "serial.h"
 #include "modbuslistner.h"
+#include "memorymap.h"
 
 #include <QDebug>
 
@@ -12,7 +13,8 @@ Servidor::Servidor(QWidget *parent) :
     serial(new Serial),
     ctx(nullptr),
     mb_mapping(nullptr),
-    listner(nullptr)
+    listner(nullptr),
+    map(new MemoryMap(this))
 {
     ui->setupUi(this);
 
@@ -23,6 +25,10 @@ Servidor::Servidor(QWidget *parent) :
 
     connect(ui->pbConn, &QPushButton::clicked,
             this, &Servidor::onConn);
+
+    if (map) {
+        ui->tableView->setModel(map);
+    }
 }
 
 Servidor::~Servidor()

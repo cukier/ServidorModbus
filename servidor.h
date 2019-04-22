@@ -6,6 +6,7 @@
 
 class Serial;
 class ModbusListner;
+class MemoryMap;
 
 namespace Ui {
 class Servidor;
@@ -28,6 +29,7 @@ private:
     modbus_t *ctx;
     modbus_mapping_t *mb_mapping;
     ModbusListner *listner;
+    MemoryMap *map;
 
     bool isConn = false;
 };

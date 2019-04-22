@@ -33,7 +33,8 @@ SOURCES += \
     libmodbus/src/modbus-data.c \
     libmodbus/src/modbus-rtu.c \
     libmodbus/src/modbus-tcp.c \
-    modbuslistner.cpp
+    modbuslistner.cpp \
+    memorymap.cpp
 
 HEADERS += \
     serial.h \
@@ -48,7 +49,8 @@ HEADERS += \
     libmodbus/src/modbus-tcp-private.h \
     libmodbus/src/modbus-version.h \
     libmodbus/config.h \
-    modbuslistner.h
+    modbuslistner.h \
+    memorymap.h
 
 FORMS += \
     serial.ui \
