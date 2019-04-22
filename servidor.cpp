@@ -75,7 +75,7 @@ void Servidor::onConn()
 
         isConn = false;
         ui->pbConn->setText("Conectar");
-        ui->statusbar->showMessage("Desconectado");
+        ui->statusbar->showMessage("Desconectado", 1000);
     } else {
         ctx = modbus_new_rtu(serial->getParameters().porta.toUtf8(),
                              serial->getParameters().baud,
@@ -111,7 +111,7 @@ void Servidor::onConn()
                 this, &Servidor::onNewMap);
         listner->start();
         ui->pbConn->setText("Desconectar");
-        ui->statusbar->showMessage("Conectado");
+        ui->statusbar->showMessage("Conectado", 1000);
     }
 }
 
@@ -126,4 +126,7 @@ void Servidor::onNewMap()
         quint16 val = mb_mapping->tab_registers[i];
         map->setData(index, val);
     }
+
+    ui->tableView->viewport()->update();
+    ui->statusbar->showMessage("Recebido", 1000);
 }

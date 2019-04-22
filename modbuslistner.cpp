@@ -21,7 +21,6 @@ void ModbusListner::run()
 
     for (;;) {
         do {
-//            qDebug() << "<ModbusListner> aguardando";
             QMutexLocker locker(&mutex);
             rc = modbus_receive(ctx, query);
         } while (rc == 0);
@@ -40,11 +39,5 @@ void ModbusListner::run()
         if (rc == -1) {
             break;
         }
-
-//        int header_length = modbus_get_header_length(ctx);
-
-//        if (query[header_length] == 0x03) {
-
-//        }
     }
 }
