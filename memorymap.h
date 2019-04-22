@@ -2,6 +2,7 @@
 #define MEMORYMAP_H
 
 #include <QAbstractTableModel>
+#include <QVector>
 
 class MemoryMap : public QAbstractTableModel
 {
@@ -14,7 +15,8 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
-//private:
+private:
+    QVector<quint16> m_map;
 };
 
 #endif // MEMORYMAP_H

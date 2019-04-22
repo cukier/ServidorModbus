@@ -1,9 +1,12 @@
 #include "memorymap.h"
 
+#include <QDebug>
+
 MemoryMap::MemoryMap(QObject *parent)
     : QAbstractTableModel (parent)
+    , m_map(200)
 {
-
+    //    m_map.reserve(200);
 }
 
 int MemoryMap::rowCount(const QModelIndex &/*parent*/) const
@@ -20,9 +23,12 @@ QVariant MemoryMap::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole)
     {
-        return QString("Row%1, Column%2")
-                .arg(index.row() + 1)
-                .arg(index.column() +1);
+        int aux = (index.row() * 10) + index.column();
+
+        if (aux < 200) {
+            return m_map.at(aux);
+        }
     }
+
     return QVariant();
 }
